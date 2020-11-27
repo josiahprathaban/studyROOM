@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>studyROOM-SignUp</title>
+    <link rel="stylesheet" href="{% static 'login/signup.css' %}">
+</head>
+<body>
+    <div class="heading_2">study<span class="bold">ROOM</span></div>
+    <div class="heading_1">signup </div>
+    <form action="{% url 'room:index'%}" method="post">
+        {% csrf_token %}
+        <label>First name</label><br>
+        <input type="text" name="firstname" placeholder="firstname"><br>
+        <label>Last name</label><br>
+        <input type="text" name="lastname" placeholder="lastname"><br>
+        <label>Username</label><br>
+        <input type="text" name="username" placeholder="username"><br>
+        <label>E-mail</label><br>
+        <input type="email" name="email" placeholder="e-mail"><br>
+        <label>Password</label><br>
+        <input type="password" name="password" placeholder="password"><br>
+        <input type="submit" name="Login" value="Signup">
+    </form>
+    <a href="{% url 'login:login' %}">already have an account, login now?</a>
+</body>
+</html>

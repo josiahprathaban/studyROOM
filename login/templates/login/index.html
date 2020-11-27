@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>studyROOM-Login</title>
+    <link rel="stylesheet" href="{% static 'login/index.css' %}">
+</head>
+<body>
+    <div class="heading_1">Hi!, Welcome to</div>
+    <div class="heading_2">study<span class="bold">ROOM</span></div>
+    <div class="description"><p>A paragraph is a series of related sentences developing a central idea, called the topic. Try to think about paragraphs in terms of thematic unity: a paragraph is a sentence or a group of sentences that supports one central, unified idea. Paragraphs add one idea at a time to your broader argument.</p></div>
+    <div class="buttons">
+        <span class="button_dis">already have an account</span>
+        <span class="button_dis">create an new account</span>
+        <a href="{% url 'login:login' %}"><span class="button">LogIn</span></a>
+        <a href="{% url 'login:signup' %}"><span class="button">SignUp</span></a>
+    </div>
+</body>
+</html>
