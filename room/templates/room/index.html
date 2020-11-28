@@ -1,10 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    {% load static %}
     <meta charset="UTF-8">
     <title>studyROOM-Home</title>
+    <link rel="stylesheet" href="{% static 'room/index.css' %}">
 </head>
 <body>
+    <div class="nav">
+        <span class="left">
+            <span class="heading_2">study<span class="bold">ROOM</span></span></span><br>
+            <span class="heading_1">a collaborative environment</span>
+        </span>
+        <span class="right">
+            <form action="#search view " method="post">
+                <input type="search" name="search" placeholder="Search for a Question">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </span>
+    </div>
+    <div class="contents">
+        <div class="main-content">
+            <div class="new-question">
+                <form>
+                    <div class="head_1">Post an new Question</div>
+                    <div class="head_2">ask what ever you want</div>
+                    <textarea class="ques"></textarea>
+                    <textarea class="key" placeholder="Enter Key words using #"></textarea>
+                    <input type="submit" value="Post">
+                    <input type="reset" value="Cancel">
+                </form>
+            </div>
+            <hr><br>
+            <div class="latest-question">
+                <div class="head_1">Latest Questions</div><br>
+                <div class="question_">
+                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
+                    <div class="_question">How to import numpy library?</div>
+                    <div class="answer_">
+                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
+                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
+                    </div>
+                    <div class="answer_">
+                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
+                        <div class="answer">It's very basic<br>poor you haha...</div>
+                    </div>
+                    <div class="new-answer">
+                        <form>
+                            <div class="head_2">Post you answer</div>
+                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
+                            <input type="submit" value="Post">
+                            <input type="reset" value="Cancel">
+                        </form>
+                    </div>
+                </div>
+                <div class="question_">
+                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
+                    <div class="_question">How to import numpy library?</div>
+                    <div class="answer_">
+                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
+                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
+                    </div>
+                    <div class="answer_">
+                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
+                        <div class="answer">It's very basic<br>poor you haha...</div>
+                    </div>
+                    <div class="new-answer">
+                        <form>
+                            <div class="head_2">Post you answer</div>
+                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
+                            <input type="submit" value="Post">
+                            <input type="reset" value="Cancel">
+                        </form>
+                    </div>
+                </div>
+                <div class="question_">
+                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
+                    <div class="_question">How to import numpy library?</div>
+                    <div class="answer_">
+                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
+                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
+                    </div>
+                    <div class="answer_">
+                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
+                        <div class="answer">It's very basic<br>poor you haha...</div>
+                    </div>
+                    <div class="new-answer">
+                        <form>
+                            <div class="head_2">Post you answer</div>
+                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
+                            <input type="submit" value="Post">
+                            <input type="reset" value="Cancel">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr><br>
+            <div class="top-question">
+                <div class="head_1">Top Questions</div><br>
+                <div class="question_">
+                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
+                    <div class="_question">How to import numpy library?</div>
+                    <div class="answer_">
+                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
+                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
+                    </div>
+                    <div class="answer_">
+                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
+                        <div class="answer">It's very basic<br>poor you haha...</div>
+                    </div>
+                    <div class="new-answer">
+                        <form>
+                            <div class="head_2">Post you answer</div>
+                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
+                            <input type="submit" value="Post">
+                            <input type="reset" value="Cancel">
+                        </form>
+                    </div>
+                </div>
+                <div class="question_">
+                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
+                    <div class="_question">How to import numpy library?</div>
+                    <div class="answer_">
+                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
+                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
+                    </div>
+                    <div class="answer_">
+                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
+                        <div class="answer">It's very basic<br>poor you haha...</div>
+                    </div>
+                    <div class="new-answer">
+                        <form>
+                            <div class="head_2">Post you answer</div>
+                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
+                            <input type="submit" value="Post">
+                            <input type="reset" value="Cancel">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side-bar">
+            <div class="profile">
+                <div class="profile-pic"><i class="fas fa-user-circle"></i></div>
+                <div class="profile-name">Josiah Prathaban</div>
+                <div class="profile-email">josah.prathaban@gmail.com</div>
+                <div class="profile-dis">Student at University of Kelaniya</div>
+                <div class="profile-nav">
+                    <nav>Your Questions</nav>
+                    <nav>Your Answers</nav>
+                    <nav>Settings</nav>
+                </div>
 
+            </div>
+            <p>A professional profile—or resume profile—is an important tool to consider when building your resume. It is a description that highlights your skills and expertise, and it shows employers what assets you will bring to the role for which you are applying. You might consider adding a professional profile section to your resume so employers can immediately see how you could benefit their company. This guide will help you write your professional profile and show you some examples to help you get started.</p>
+            <hr>Powered by<br>
+            <img src="{% static 'room/unknown.svg' %}" width="100%">
+        </div>
+    </div>
 </body>
 </html>
