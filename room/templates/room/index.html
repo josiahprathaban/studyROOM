@@ -4,10 +4,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>studyROOM-Home</title>
     <link rel="stylesheet" href="{% static 'room/index.css' %}">
 </head>
 <body>
+{% csrf_token %}
     <div class="nav">
         <span class="left">
             <span class="heading_2">study<span class="bold">ROOM</span></span></span><br>
@@ -15,7 +17,7 @@
         </span>
         <span class="right">
             <form action="#search view " method="post">
-                <input type="search" name="search" placeholder="Search for a Question">
+                <input type="search" name="search" placeholder="Search for a Question" required>
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form>
         </span>
@@ -23,11 +25,11 @@
     <div class="contents">
         <div class="main-content">
             <div class="new-question">
-                <form>
+                <form action="{% url 'room:update' %}" method="post">{% csrf_token %}
                     <div class="head_1">Post an new Question</div>
                     <div class="head_2">ask what ever you want</div>
-                    <textarea class="ques"></textarea>
-                    <textarea class="key" placeholder="Enter Key words using #"></textarea>
+                    <textarea class="ques" name="question" required></textarea>
+                    <textarea class="key" placeholder="Enter Key words using #" name="key" required></textarea>
                     <input type="submit" value="Post">
                     <input type="reset" value="Cancel">
                 </form>
@@ -35,128 +37,75 @@
             <hr><br>
             <div class="latest-question">
                 <div class="head_1">Latest Questions</div><br>
-                <div class="question_">
-                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
-                    <div class="_question">How to import numpy library?</div>
-                    <div class="answer_">
-                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
-                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
-                    </div>
-                    <div class="answer_">
-                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
-                        <div class="answer">It's very basic<br>poor you haha...</div>
-                    </div>
-                    <div class="new-answer">
-                        <form>
-                            <div class="head_2">Post you answer</div>
-                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
-                            <input type="submit" value="Post">
-                            <input type="reset" value="Cancel">
-                        </form>
-                    </div>
-                </div>
-                <div class="question_">
-                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
-                    <div class="_question">How to import numpy library?</div>
-                    <div class="answer_">
-                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
-                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
-                    </div>
-                    <div class="answer_">
-                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
-                        <div class="answer">It's very basic<br>poor you haha...</div>
-                    </div>
-                    <div class="new-answer">
-                        <form>
-                            <div class="head_2">Post you answer</div>
-                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
-                            <input type="submit" value="Post">
-                            <input type="reset" value="Cancel">
-                        </form>
-                    </div>
-                </div>
-                <div class="question_">
-                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
-                    <div class="_question">How to import numpy library?</div>
-                    <div class="answer_">
-                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
-                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
-                    </div>
-                    <div class="answer_">
-                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
-                        <div class="answer">It's very basic<br>poor you haha...</div>
-                    </div>
-                    <div class="new-answer">
-                        <form>
-                            <div class="head_2">Post you answer</div>
-                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
-                            <input type="submit" value="Post">
-                            <input type="reset" value="Cancel">
-                        </form>
-                    </div>
-                </div>
+                {% if latest_question %}
+                    {% for question in latest_question %}
+                        <div class="question_">
+                            <div class="user">{{ question.user.username }}{% if question.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ question.pub_date }}</span></div>
+                            <div class="_question">{{ question.question_text}}</div>
+                            {% for answer in question.answer_set.top_question %}
+                                <div class="answer_">
+                                    <div class="user">{{ answer.user.username }}<span class="pub-date">{{ answer.pub_date }}</span></div>
+                                    <div class="answer">{{ answer.answer_text}}</div>
+                                    {% if answer.user.username == ser.username %}
+                                        <button>edit</button>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            <div class="new-answer">
+                                <form>
+                                    <div class="head_2">Post you answer</div>
+                                    <textarea class="post-ans" placeholder="Post your answer for this question" required></textarea>
+                                    <input type="submit" value="Post">
+                                    <input type="reset" value="Cancel">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
             <hr><br>
             <div class="top-question">
                 <div class="head_1">Top Questions</div><br>
-                <div class="question_">
-                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
-                    <div class="_question">How to import numpy library?</div>
-                    <div class="answer_">
-                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
-                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
-                    </div>
-                    <div class="answer_">
-                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
-                        <div class="answer">It's very basic<br>poor you haha...</div>
-                    </div>
-                    <div class="new-answer">
-                        <form>
-                            <div class="head_2">Post you answer</div>
-                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
-                            <input type="submit" value="Post">
-                            <input type="reset" value="Cancel">
-                        </form>
-                    </div>
-                </div>
-                <div class="question_">
-                    <div class="user">Mala<span class="pub-date">12-Jan-2019</span></div>
-                    <div class="_question">How to import numpy library?</div>
-                    <div class="answer_">
-                        <div class="user">Kumar<span class="pub-date">22-Sep-2019</span></div>
-                        <div class="answer">It's very easy to do! Just type "import numpy as np" np is whatever you want...<br>I hope it's helpful!</div>
-                    </div>
-                    <div class="answer_">
-                        <div class="user">Kusum<span class="pub-date">13-Feb-2019</span></div>
-                        <div class="answer">It's very basic<br>poor you haha...</div>
-                    </div>
-                    <div class="new-answer">
-                        <form>
-                            <div class="head_2">Post you answer</div>
-                            <textarea class="post-ans" placeholder="Post your answer for this question"></textarea>
-                            <input type="submit" value="Post">
-                            <input type="reset" value="Cancel">
-                        </form>
-                    </div>
-                </div>
+                {% if top_question %}
+                    {% for question in top_question %}
+                        <div class="question_">
+                            <div class="user">{{ question.user.username }}{% if question.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ question.pub_date }}</span></div>
+                            <div class="_question">{{ question.question_text}}</div>
+                            {% for answer in question.answer_set.top_answers %}
+                                <div class="answer_">
+                                    <div class="user">{{ answer.user.username }}<span class="pub-date">{{ answer.pub_date }}</span></div>
+                                    <div class="answer">{{ answer.answer_text}}</div>
+                                </div>
+                            {% endfor %}
+                            <div class="new-answer">
+                                <form>
+                                    <div class="head_2">Post you answer</div>
+                                    <textarea class="post-ans" placeholder="Post your answer for this question" required></textarea>
+                                    <input type="submit" value="Post">
+                                    <input type="reset" value="Cancel">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="side-bar">
             <div class="profile">
                 <div class="profile-pic"><i class="fas fa-user-circle"></i></div>
-                <div class="profile-name">Josiah Prathaban</div>
-                <div class="profile-email">josah.prathaban@gmail.com</div>
+                <div class="profile-name">{{ user.get_full_name }}</div>
+                <div class="profile-email">{{ user.email }}</div>
                 <div class="profile-dis">Student at University of Kelaniya</div>
                 <div class="profile-nav">
                     <nav>Your Questions</nav>
                     <nav>Your Answers</nav>
-                    <nav>Settings</nav>
+                    <nav>Settings | <a href="{% url 'login:logout' %}">logout</a></nav>
                 </div>
 
             </div>
             <p>A professional profile—or resume profile—is an important tool to consider when building your resume. It is a description that highlights your skills and expertise, and it shows employers what assets you will bring to the role for which you are applying. You might consider adding a professional profile section to your resume so employers can immediately see how you could benefit their company. This guide will help you write your professional profile and show you some examples to help you get started.</p>
             <hr>Powered by<br>
-            <img src="{% static 'room/unknown.svg' %}" width="100%">
+            <img src="{% static 'room/unknown.svg' %}" width="180px">
         </div>
     </div>
 </body>

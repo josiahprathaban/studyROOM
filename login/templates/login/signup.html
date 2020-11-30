@@ -9,18 +9,21 @@
 <body>
     <div class="heading_2">study<span class="bold">ROOM</span></div>
     <div class="heading_1">signup </div>
-    <form action="{% url 'room:index'%}" method="post">
+    <form action="{% url 'login:success'%}" method="post">
         {% csrf_token %}
         <label>First name</label><br>
-        <input type="text" name="firstname" placeholder="firstname"><br>
+        <input type="text" name="firstname" placeholder="firstname" required><br>
         <label>Last name</label><br>
-        <input type="text" name="lastname" placeholder="lastname"><br>
+        <input type="text" name="lastname" placeholder="lastname" required><br>
         <label>Username</label><br>
-        <input type="text" name="username" placeholder="username"><br>
+        <input type="text" name="username" placeholder="username" required><br>
         <label>E-mail</label><br>
-        <input type="email" name="email" placeholder="e-mail"><br>
+        <input type="email" name="email" placeholder="e-mail" required><br>
         <label>Password</label><br>
-        <input type="password" name="password" placeholder="password"><br>
+        <input type="password" name="password" placeholder="password" required><br>
+        {% if error %}
+            <label style="color: #a34040"><i>The username is already taken, try different!</i></label><br>
+        {% endif %}
         <input type="submit" name="Login" value="Signup">
     </form>
     <a href="{% url 'login:login' %}">already have an account, login now?</a>

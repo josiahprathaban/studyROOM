@@ -1,6 +1,7 @@
 body{
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    margin: 0px;
+    margin: 0;
+    overflow: auto;
 }
 .nav{
     padding: 20px;
@@ -97,7 +98,7 @@ input[type=submit], input[type=reset]{
     padding: 10px 20px 10px 20px;
     border-radius: 3px;
     border: none;
-    margin: 10px 0px 5px 10px;
+    margin: 10px 0 5px 10px;
 }
 input[type=submit]:focus ,input[type=submit]:active, input[type=submit]:hover, input[type=reset]:focus ,input[type=reset]:active, input[type=reset]:hover{
     outline: none;
@@ -147,7 +148,7 @@ hr{
     padding: 10px 20px 10px 20px;
     border-radius: 3px;
     border: none;
-    margin: 10px 0px 5px 10px;
+    margin: 10px 0 5px 10px;
 }
 .new-answer input[type=submit]:focus ,.new-answer input[type=submit]:active, .new-answer input[type=submit]:hover, .new-answer input[type=reset]:focus ,.new-answer input[type=reset]:active, .new-answer input[type=reset]:hover{
     outline: none;
@@ -167,8 +168,40 @@ hr{
     margin-bottom: 5px;
 }
 .profile-email{
+    font-size: 11px;
     font-style: italic;
 }
-.profile-nav{
+.profile-nav {
     margin-top: 20px;
+}
+@media screen and (max-width: 1000px) {
+    .contents{
+    display: block;
+    }
+}
+@media screen and (max-width: 650px) {
+.right{
+    display: block;
+    float: none;
+    margin: auto;
+    text-align: center;
+}
+    form{
+        padding-top: 20px;
+        margin: auto;
+        text-align: center;
+}
+    .heading_1{
+        margin: 0;
+        display: block;
+        text-align: center;
+}
+.heading_2{
+    margin: 0;
+    display: block;
+    text-align: center;
+}
+}
+a{
+    text-decoration: none;
 }

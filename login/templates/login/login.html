@@ -12,9 +12,12 @@
     <form action="{% url 'room:index'%}" method="post">
         {% csrf_token %}
         <label>Username or e-mail</label><br>
-        <input type="text" name="username" placeholder="username or e-mail"><br>
+        <input type="text" name="username" placeholder="username or e-mail" required><br>
         <label>Password</label><br>
-        <input type="password" name="password" placeholder="password"><br>
+        <input type="password" name="password" placeholder="password" required><br>
+        {% if error %}
+            <label style="color: #a34040"><i>Invalid username or password!</i></label><br>
+        {% endif %}
         <input type="submit" name="Login" value="Login">
     </form>
     <a href="{% url 'login:signup' %}">don't have an account, create new?</a>
