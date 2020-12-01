@@ -23,6 +23,16 @@ def update_question(request):
     return content(request.user, request)
 
 
+def update_answer(request, question_id):
+    answer = Answer(user=request.user, question_id=question_id, answer_text=request.POST['answer'],
+                    pub_date=timezone.now())
+    question = Question.objects.get(pk=question_id)
+    question.ans_count = question.ans_count + 1
+    question.save()
+    answer.save()
+    return content(request.user, request)
+
+
 def content(user, request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     top_question_list = Question.objects.order_by('-ans_count')[:5]

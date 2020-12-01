@@ -25,7 +25,7 @@
     <div class="contents">
         <div class="main-content">
             <div class="new-question">
-                <form action="{% url 'room:update' %}" method="post">{% csrf_token %}
+                <form action="{% url 'room:update_question' %}" method="post">{% csrf_token %}
                     <div class="head_1">Post an new Question</div>
                     <div class="head_2">ask what ever you want</div>
                     <textarea class="ques" name="question" required></textarea>
@@ -42,19 +42,24 @@
                         <div class="question_">
                             <div class="user">{{ question.user.username }}{% if question.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ question.pub_date }}</span></div>
                             <div class="_question">{{ question.question_text}}</div>
-                            {% for answer in question.answer_set.top_question %}
+                            {% for answer in question.answer_set.all %}
                                 <div class="answer_">
-                                    <div class="user">{{ answer.user.username }}<span class="pub-date">{{ answer.pub_date }}</span></div>
+                                    <div class="user">{{ answer.user.username }}{% if answer.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ answer.pub_date }}</span></div>
                                     <div class="answer">{{ answer.answer_text}}</div>
-                                    {% if answer.user.username == ser.username %}
-                                        <button>edit</button>
+                                    {% if answer.user.username == user.username %}
+                                        <a href="">edit</a>
                                     {% endif %}
                                 </div>
+                                {% empty %}
+                                {% if question.user.username != user.username %}
+                                <br>
+                                <i><b>be the first to answer this question</b></i>
+                                {% endif %}
                             {% endfor %}
                             <div class="new-answer">
-                                <form>
+                                <form action="{% url 'room:update_answer' question.id %}" method="post">{% csrf_token %}
                                     <div class="head_2">Post you answer</div>
-                                    <textarea class="post-ans" placeholder="Post your answer for this question" required></textarea>
+                                    <textarea class="post-ans" placeholder="Post your answer for this question" name="answer" required></textarea>
                                     <input type="submit" value="Post">
                                     <input type="reset" value="Cancel">
                                 </form>
