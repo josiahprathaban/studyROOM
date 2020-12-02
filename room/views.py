@@ -52,3 +52,28 @@ def search(request):
         'key': request.POST['search'],
     }
     return render(request, 'room/search.html', context)
+
+
+def like(request, answer_id):
+    answer = Answer.objects.get(pk=answer_id)
+    answer.votes = answer.votes + 1
+    answer.save()
+    return redirect('room:index')
+
+
+def your_question(request):
+    question_list = Question.objects.filter(user=request.user)
+    context = {
+        'user': request.user,
+        'question_list': question_list,
+    }
+    return render(request, 'room/your_questions.html', context)
+
+
+def your_answer(request):
+    answer_list = Answer.objects.filter(user=request.user)
+    context = {
+        'user': request.user,
+        'answer_list': answer_list,
+    }
+    return render(request, 'room/your_answers.html', context)

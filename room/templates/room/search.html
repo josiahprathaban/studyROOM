@@ -23,7 +23,7 @@
             </form>
         </span>
     </div>
-    <div class="contents">
+    <div class="contents" id="top">
         <div class="main-content">
             <div class="latest-question">
                 <div class="head_1">Search founds : {{ search_question|length }}</div><br>
@@ -71,8 +71,9 @@
                 <div class="profile-email">{{ user.email }}</div>
                 <div class="profile-dis">Student at University of Kelaniya</div>
                 <div class="profile-nav">
-                    <nav>> Your Questions</nav>
-                    <nav>> Your Answers&nbsp;&nbsp;</nav><br>
+                    <nav><b>-- Your Posts --</b></nav>
+                    <nav>> <a href="{% url 'room:question' %}">Questions</a></nav>
+                    <nav>> <a href="{% url 'room:answer' %}">Answers&nbsp;&nbsp;</a></nav><br>
                     <nav>Settings | <a href="{% url 'login:logout' %}">{% csrf_token %}logout</a></nav><br>
                 </div>
 
@@ -82,6 +83,15 @@
             <unknown>UNKNOWN</unknown><inc> Inc.</inc>
             <!--<img src="{% static 'room/unknown.svg' %}" width="180px">-->
         </div>
+    </div>
+    <a href="#top"><div class="up">^<br>up</div></a>
+    <div class="footer">
+        <span class="head_2">Contact us</span> |
+        <a href="https://www.linkedin.com/in/josiah-prathaban/" target="_blank"><i class="fab fa-linkedin"></i></a>  |
+        <a href="https://github.com/josiahprathaban" target="_blank"><i class="fab fa-github-square"></i></a>  |
+        <a href="https://www.facebook.com/josiah.prathaban" target="_blank"><i class="fab fa-facebook-square"></i></a>  |
+        <a href="https://www.blogger.com/profile/14730380695491700190" target="_blank"><i class="fab fa-blogger"></i></a>  |
+        <i class="fab fa-whatsapp"></i> <span class="head_2">+94 76 6641 296</span>
     </div>
 </body>
 </html>

@@ -31,7 +31,7 @@ form{
 .right{
     float: right;
     margin-top: -30px;
-    margin-right: 30px;
+    margin-right: 50px;
 }
 input[type=search]{
     text-align: right;
@@ -125,7 +125,7 @@ hr{
     font-style: italic;
 }
 .pub-date{
-    font-size: 11px;
+    font-size: 10px;
     float: right;
 }
 ._question{
@@ -215,16 +215,48 @@ a{
     color: #365549;
 }
 a:hover{
-    color: #443655;
+    color: #66786b;
 }
 nav{
     margin: 5px;
 }
 unknown{
     font-size: 22px;
-    color: #373e3d;
+    color: #505f57;
     font-weight: bolder;
 }
 inc{
     color: #373e3d;
+}
+.like{
+    text-align: right;
+    color: #899a94;
+    font-style: italic;
+    font-size: 13px;
+}
+.edit{
+    font-style: italic;
+    font-size: 12px;
+}
+.footer{
+    text-align: right;
+    color: white;
+    padding: 15px 50px 15px 15px;
+    background-color: rgba(54,85,73,0.95);
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+.footer a{
+    color: white;
+}
+.up{
+    display: inline-block;
+    position: fixed;
+    right: 10px;
+    bottom: 55px;
+    padding: 10px;
+    border-radius: 40px;
+    background-color: rgba(54,85,73,0.3);
+    color: white;
+    text-align: center;
 }
