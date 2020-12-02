@@ -3,13 +3,14 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>studyROOM-SignIn</title>
     <link rel="stylesheet" href="{% static 'login/login.css' %}">
 </head>
 <body>
     <div class="heading_2">study<span class="bold">ROOM</span></div>
     <div class="heading_1">login </div>
-    <form action="{% url 'room:index'%}" method="post">
+    <form action="{% url 'room:login'%}" method="post">
         {% csrf_token %}
         <label>Username or e-mail</label><br>
         <input type="text" name="username" placeholder="username or e-mail" required><br>

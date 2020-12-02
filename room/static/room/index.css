@@ -4,6 +4,10 @@ body{
     overflow: auto;
 }
 .nav{
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
     padding: 20px;
     background-color: #365549;
 }
@@ -52,6 +56,7 @@ input[type=search]:focus ,input[type=search]:active, input[type=search]:hover{
     outline: none;
 }
 .contents{
+    padding-top: 100px;
     display: grid;
     grid-template-columns: 75% 25%;
     min-height: 90vh;
@@ -186,7 +191,7 @@ hr{
     margin: auto;
     text-align: center;
 }
-    form{
+    .right form{
         padding-top: 20px;
         margin: auto;
         text-align: center;
@@ -201,7 +206,25 @@ hr{
     display: block;
     text-align: center;
 }
+.contents{
+    padding-top: 150px;
+}
 }
 a{
     text-decoration: none;
+    color: #365549;
+}
+a:hover{
+    color: #443655;
+}
+nav{
+    margin: 5px;
+}
+unknown{
+    font-size: 22px;
+    color: #373e3d;
+    font-weight: bolder;
+}
+inc{
+    color: #373e3d;
 }

@@ -5,15 +5,17 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>studyROOM-Home</title>
+    <title>studyROOM-Search</title>
     <link rel="stylesheet" href="{% static 'room/index.css' %}">
 </head>
 <body>
-    <div class="nav">
-        <span class="left">
-            <span class="heading_2">study<span class="bold">ROOM</span></span><br>
-            <span class="heading_1">a collaborative environment</span>
-        </span>
+<div class="nav">
+        <a href="{% url 'room:index' %}">
+            <span class="left">
+                <span class="heading_2">study<span class="bold">ROOM</span></span><br>
+                <span class="heading_1">a collaborative environment</span>
+            </span>
+        </a>
         <span class="right">
             <form action="{% url 'room:search' %}" method="post">{% csrf_token %}
                 <input type="search" name="search" placeholder="Search for a Question" required>
@@ -23,21 +25,15 @@
     </div>
     <div class="contents">
         <div class="main-content">
-            <div class="new-question">
-                <form action="{% url 'room:update_question' %}" method="post">{% csrf_token %}
-                    <div class="head_1">Post an new Question</div>
-                    <div class="head_2">ask what ever you want</div>
-                    <textarea class="ques" name="question" required></textarea>
-                    <textarea class="key" placeholder="Enter Key words using #" name="key" required></textarea>
-                    <input type="submit" value="Post">
-                    <input type="reset" value="Cancel">
-                </form>
-            </div>
-            <hr><br>
             <div class="latest-question">
-                <div class="head_1">Latest Questions</div><br>
-                {% if latest_question %}
-                    {% for question in latest_question %}
+                <div class="head_1">Search founds : {{ search_question|length }}</div><br>
+                {% if search_question|length  == 0 %}
+                    <a href="https://www.google.com/search?q={{ key }}" target="_blank">> Search in Google</a><br>
+                    <a href="https://www.stackoverflow.com/search?q={{ key }}" target="_blank">> Search in stackoverflow</a><br>
+                    <a href="https://www.quora.com/search?q={{ key }}" target="_blank">> Search in Quora</a>
+                {% endif %}
+                {% if search_question %}
+                    {% for question in search_question %}
                         <div class="question_">
                             <div class="user">{{ question.user.username }}{% if question.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ question.pub_date }}</span></div>
                             <div class="_question">{{ question.question_text}}</div>
@@ -67,32 +63,6 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <hr><br>
-            <div class="top-question">
-                <div class="head_1">Top Questions</div><br>
-                {% if top_question %}
-                    {% for question in top_question %}
-                        <div class="question_">
-                            <div class="user">{{ question.user.username }}{% if question.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ question.pub_date }}</span></div>
-                            <div class="_question">{{ question.question_text}}</div>
-                            {% for answer in question.answer_set.top_answers %}
-                                <div class="answer_">
-                                    <div class="user">{{ answer.user.username }}<span class="pub-date">{{ answer.pub_date }}</span></div>
-                                    <div class="answer">{{ answer.answer_text}}</div>
-                                </div>
-                            {% endfor %}
-                            <div class="new-answer">
-                                <form>{% csrf_token %}
-                                    <div class="head_2">Post you answer</div>
-                                    <textarea class="post-ans" placeholder="Post your answer for this question" required></textarea>
-                                    <input type="submit" value="Post">
-                                    <input type="reset" value="Cancel">
-                                </form>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
         </div>
         <div class="side-bar">
             <div class="profile">
@@ -113,5 +83,7 @@
             <!--<img src="{% static 'room/unknown.svg' %}" width="180px">-->
         </div>
     </div>
+</body>
+</html>
 </body>
 </html>
