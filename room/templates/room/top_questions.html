@@ -25,29 +25,14 @@
     </div>
     <div class="contents" id="top">
         <div class="main-content">
-            <div class="new-question">
-                <form action="{% url 'room:update_question' %}" method="post">{% csrf_token %}
-                    <div class="head_1">Post a new Question</div>
-                    <div class="head_2">ask what ever you want</div>
-                    <textarea class="ques" name="question" required></textarea>
-                    <textarea class="key" placeholder="Enter Key words using #" name="key" required></textarea>
-                    <input type="submit" value="Post">
-                    <input type="reset" value="Cancel">
-                </form>
-            </div>
-            <hr><br>
             <div class="latest-question">
-                <div class="head_1">Your Answers</div><br>
-                {% if answer_list|length == 0 %}
-                    You didn't post any Answers yet.
-                {% endif %}
-                {% if answer_list %}
-                    {% for your_answer in answer_list %}
+                <div class="head_1">Top Questions</div><br>
+                {% if question_list %}
+                    {% for question in question_list %}
                         <div class="question_">
-                            <div class="user">{{ your_answer.question.user.username }}{% if your_answer.question.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ your_answer.question.pub_date|timesince }} ago</span></div>
-                            <div class="_question">{{ your_answer.question.question_text}}</div>
-                            {% for answer in your_answer.question.answer_set.all %}
-                                {% if your_answer.id == answer.id %}
+                            <div class="user">{{ question.user.username }}{% if question.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ question.pub_date|timesince }} ago</span></div>
+                            <div class="_question"><a href="{% url 'room:to_question' question.id %}">{{ question.question_text}}</a></div>
+                            {% for answer in question.answer_set.all|slice:":5" %}
                                 <div class="answer_">
                                     <div class="user">{{ answer.user.username }}{% if answer.user.username == user.username %} (you){% endif %}<span class="pub-date">{{ answer.pub_date|timesince }} ago</span></div>
                                     <div class="answer">{{ answer.answer_text}}</div>
@@ -55,8 +40,9 @@
                                         <a href="{% url 'room:to_edit' answer.id %}">edit</a> | <a href="{% url 'room:delete_answer' answer.id%}">delete</a>
                                     {% endif %}</div>
                                 <span class="like">{{ answer.votes }} votes <a href="{% url 'room:like' answer.id %}" class="like">| <i class="fas fa-fist-raised"></i></a></span>
+                                <div></div>
                                 </div>
-                                {% endif %}
+
                                 {% empty %}
                                 {% if question.user.username != user.username %}
                                 <br>
@@ -64,7 +50,7 @@
                                 {% endif %}
                             {% endfor %}
                             <div class="new-answer"><br>
-                                <form action="{% url 'room:update_answer' your_answer.question.id %}" method="post">{% csrf_token %}
+                                <form action="{% url 'room:update_answer' question.id %}" method="post">{% csrf_token %}
                                     <div class="head_2">Post your answer</div>
                                     <textarea class="post-ans" placeholder="Post your answer for this question" name="answer" required></textarea>
                                     <input type="submit" value="Post">
